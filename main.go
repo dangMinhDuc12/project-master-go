@@ -7,7 +7,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"insurance/db"
+	db "insurance/db/postgresql"
+
+	redisDb "insurance/db/redis"
 )
 
 func main() {
@@ -27,9 +29,13 @@ func main() {
 
 
 
+	//Connect Redis
+	rdb := redisDb.ConnectRedis()
+	defer rdb.Close()
+
 
 	//Setup router
-	routesInsurance := routes.NewRouterInsurance(router, db)
+	routesInsurance := routes.NewRouterInsurance(router, db, rdb)
 	routesInsurance.Setup()
 
 
