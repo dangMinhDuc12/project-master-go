@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	authRouter "insurance/routes/auth"
 	claimFolderRouter "insurance/routes/claimFolder"
+	claimImageRouter "insurance/routes/claimImage"
 
 	"github.com/gin-gonic/gin"
 
@@ -32,5 +33,9 @@ func (ri *RouterInsurance) Setup() {
 
 	claimFolderRouterInstance := claimFolderRouter.NewRouterAuthInsurance(ri.Router, ri.DB, ri.Redis)
 	claimFolderRouterInstance.SetupClaimFolderRouter()
+
+
+	claimImageRouterInstance := claimImageRouter.NewRouterClaimImage(ri.Router, ri.DB, ri.Redis)
+	claimImageRouterInstance.SetupClaimImageRouter()
 
 }

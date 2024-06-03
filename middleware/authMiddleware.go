@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -32,7 +31,6 @@ func AuthMiddleware() gin.HandlerFunc {
 		}
 
 		authHeader := c.GetHeader("Authorization")
-		fmt.Println("authHeader", authHeader)
 
 		//validate token exist
 		if (authHeader == "") {
@@ -43,7 +41,6 @@ func AuthMiddleware() gin.HandlerFunc {
 
 		//validate format token
 		tokenParts := strings.Split(authHeader, " ")
-		fmt.Println("tokenParts", tokenParts)
 
 		if len(tokenParts) != 2 || tokenParts[0] != "Bearer" {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Authorization header format"})
@@ -65,10 +62,7 @@ func AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		fmt.Println("jwtClaims", jwtClaims)
 
-
-		fmt.Println("This is middleware", c.Request.URL.Path)
 		c.Next()
 	}
 }

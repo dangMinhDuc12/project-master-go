@@ -2,7 +2,6 @@ package claimFolderModel
 
 import (
 	"database/sql"
-	"fmt"
 
 	_ "github.com/lib/pq"
 )
@@ -27,7 +26,6 @@ func NewClaimFolderModel(db *sql.DB) *ClaimFolderModel {
 }
 
 func (cfm *ClaimFolderModel) AddNewClaimFolder(claimFolderInfo AddNewClaimFolderRequest) (ClaimFolder, error) {
-	fmt.Println("claimFolderInfo", claimFolderInfo)
 
 	var claimFolder ClaimFolder
 
